@@ -1,14 +1,43 @@
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box;  
 }
 html,body{
     height: 100%;
     width: 100%;
+    color: var(--primary-text-color);
+}
+:root{
+
+    --primary-bg-color:rgb(22, 22, 22);
+
+    --primary-text-color: whitesmoke;
+    
+    --border : 1px solid whitesmoke;
 }
 main{
     height: 100%;
     width: 100%;
-    background-color: black;
+    background-color: var(--primary-bg-color);
+    padding: 80px;
+}
+section{
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.infos{
+    display: flex;
+    justify-content: space-between;
+}
+.info{
+    border: var(--border);
+    padding: 5px;
+}
+.board{
+    flex-grow: 1;
+    border: var(--border);
 }
