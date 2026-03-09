@@ -42,7 +42,7 @@ section{
     border: var(--border);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
-    grid-template-rows: repeat(auto-fill, minmax(30px, 1fr));
+    grid-template-rows: repeat(auto-fill, 30px);
 }
 .block{
     height:30px;
