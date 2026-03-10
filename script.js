@@ -1,11 +1,13 @@
 let board = document.querySelector('.board');
 let blockheight = 30;
 let blockwidth = 30;
-let col = Math.floor(board.clientHeight / blockheight);
-let row = Math.floor(board.clientWidth / blockwidth);
+let cols = Math.floor(board.clientHeight / blockheight);
+let rows = Math.floor(board.clientWidth / blockwidth);
 
-for(let i = 0; i < row*col; i++){
-    const block = document.createElement('div');
-    block.classList.add('block');
-    board.appendChild(block);
+for(let row = 0; row < rows; row++){
+    for(let col =0; col < cols; col++){
+        let block = document.createElement('div');
+        block.classList.add('block');
+        board.appendChild(block);
+    }
 }
