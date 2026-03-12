@@ -1,7 +1,7 @@
 const board = document.querySelector('.board');
 
-const blockheight = 30;
-const blockwidth = 30;
+const blockheight = 40;
+const blockwidth = 40;
 
 const rows = Math.floor(board.clientHeight / blockheight);
 const cols = Math.floor(board.clientWidth / blockwidth);
@@ -18,16 +18,14 @@ for(let row = 0; row < rows; row++){
     for(let col = 0; col < cols; col++){
         const block = document.createElement('div');
         block.classList.add('block');
+        block.innerText = `${row}-${col}`
         board.appendChild(block);
-
         blocks.push(block);
     }
 }
 
 function render(){
-    snake.forEach(segment =>{
-        const index = segment.x * cols + segment.y;
-        blocks[index].classList.add('fill');
+    snake.forEach(segment=>{
+        blocks[ `${segment.x}-${segment.y}` ].classList.add('fill');
     })
 }
-render();
