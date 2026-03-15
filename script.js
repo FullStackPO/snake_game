@@ -21,6 +21,16 @@ for(let row = 0; row < rows; row++){
     }
 }
 
+function food(){
+  let x = Math.floor(Math.random()*rows)
+  let y = Math.floor(Math.random()*cols)
+
+  blocks[ `${x}-${y}` ].classList.add('food')
+
+}
+food();
+
+
 function clearBoard(){
     Object.values(blocks).forEach(block=>{
         block.classList.remove('fill');
@@ -63,5 +73,5 @@ document.addEventListener('keydown',(e) => {
 
 setInterval(()=>{
     snakeMove()
-     render()
+    render()
 },300)

@@ -16,6 +16,8 @@ html,body{
     --primary-text-color: whitesmoke;
 
     --border : 1px solid rgb(120, 120, 120);
+
+    --food-color : crimson;
 }
 main,section{
     height: 100%;
@@ -48,4 +50,8 @@ section{
 
 .fill{
     background-color: var(--primary-text-color);
+}
+
+.food{
+    background-color: var(--food-color);
 }
