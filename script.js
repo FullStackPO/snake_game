@@ -21,7 +21,16 @@ for(let row = 0; row < rows; row++){
     }
 }
 
+function clearBoard(){
+    Object.values(blocks).forEach(block=>{
+        block.classList.remove('fill');
+    })
+}
+
 function render(){
+
+    clearBoard();
+
     snake.forEach(segment => {
         blocks[`${segment.x}-${segment.y}`].classList.add('fill')
     })
