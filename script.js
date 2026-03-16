@@ -12,6 +12,8 @@ let snake = [{x:5,y:8},{x:5,y:9},{x:5,y:10}];
 
 let direction = 'right';
 
+let foodPos = {}; 
+
 for(let row = 0; row < rows; row++){
     for(let col = 0; col < cols; col++){
         const block = document.createElement('div');
@@ -22,20 +24,26 @@ for(let row = 0; row < rows; row++){
 }
 
 function food(){
+
   let x = Math.floor(Math.random()*rows)
   let y = Math.floor(Math.random()*cols)
+
+  foodPos = {x,y}
 
   blocks[ `${x}-${y}` ].classList.add('food')
 
 }
+
 food();
 
 
 function clearBoard(){
     Object.values(blocks).forEach(block=>{
         block.classList.remove('fill');
+        block.classList.remove('food');
     })
 }
+
 
 function render(){
 
@@ -44,6 +52,8 @@ function render(){
     snake.forEach(segment => {
         blocks[`${segment.x}-${segment.y}`].classList.add('fill')
     })
+
+    blocks[`${foodPos.x}-${foodPos.y}`].classList.add('food')
 }
 
 
@@ -57,8 +67,13 @@ function snakeMove(){
     if(direction === 'left') head.y -= 1;
 
     snake.push(head);
-    snake.shift();
-    
+
+    if(head.x === foodPos.x && head.y === foodPos.y){
+        food(); // spawn new food
+    }else{
+        snake.shift(); // remove tail normally
+    }
+
 }
 
 
