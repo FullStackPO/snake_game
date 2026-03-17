@@ -36,6 +36,11 @@ function food(){
 
 food();
 
+function resetGame(){
+    snake = [{x:5,y:8},{x:5,y:9},{x:5,y:10}];
+    direction = 'right';
+    food();
+}
 
 function clearBoard(){
     Object.values(blocks).forEach(block=>{
@@ -65,6 +70,12 @@ function snakeMove(){
     if(direction === 'down') head.x += 1;
     if(direction === 'right') head.y += 1;
     if(direction === 'left') head.y -= 1;
+
+    if(head.x < 0 || head.x >= rows || head.y < 0 || head.y >= cols){
+    alert("Game Over 💀");
+    resetGame();
+    return;
+    }
 
     snake.push(head);
 
