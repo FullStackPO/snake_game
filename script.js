@@ -25,12 +25,22 @@ for(let row = 0; row < rows; row++){
 
 function food(){
 
-  let x = Math.floor(Math.random()*rows)
-  let y = Math.floor(Math.random()*cols)
+//   let x = Math.floor(Math.random()*rows)
+//   let y = Math.floor(Math.random()*cols)
 
-  foodPos = {x,y}
+//   foodPos = {x,y}
 
-  blocks[ `${x}-${y}` ].classList.add('food')
+//   blocks[ `${x}-${y}` ].classList.add('food')
+
+
+  let x, y;
+
+  do{
+    x = Math.floor(Math.random()*rows)
+    y = Math.floor(Math.random()*cols)
+  }while(snake.some(s => s.x === x && s.y === y))
+
+  foodPos = {x,y};
 
 }
 
