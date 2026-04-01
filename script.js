@@ -1,5 +1,6 @@
 const board = document.querySelector('.board');
 const timeDisplay = document.querySelector('.infos .info:nth-child(3) h3');
+const scoreDisplay = document.querySelector('.infos .info:nth-child(2) h3');
 
 const blockheight = 40;
 const blockwidth = 40;
@@ -10,13 +11,14 @@ const cols = Math.floor(board.clientWidth / blockwidth);
 let blocks = {};
 
 let snake = [{x:5,y:8},{x:5,y:9},{x:5,y:10}];
-
 let direction = 'right';
 
 let foodPos = {};
 
 let seconds = 0;
 let timerInterval;
+
+let score = 0;
 
 
 // CREATE BOARD
@@ -30,7 +32,7 @@ for(let row = 0; row < rows; row++){
 }
 
 
-// TIMER START
+// TIMER
 function startTimer(){
     clearInterval(timerInterval);
 
@@ -49,8 +51,6 @@ function startTimer(){
     },1000);
 }
 
-
-// RESET TIMER
 function resetTimer(){
     seconds = 0;
     timeDisplay.textContent = "Time : 00-00";
@@ -58,7 +58,18 @@ function resetTimer(){
 }
 
 
-// SPAWN FOOD
+// SCORE
+function updateScore(){
+    scoreDisplay.textContent = "Score : " + score;
+}
+
+function resetScore(){
+    score = 0;
+    updateScore();
+}
+
+
+// FOOD
 function food(){
 
     let x, y;
@@ -81,7 +92,7 @@ function clearBoard(){
 }
 
 
-// RENDER GAME
+// RENDER
 function render(){
 
     clearBoard();
@@ -100,6 +111,7 @@ function resetGame(){
     direction = 'right';
     food();
     resetTimer();
+    resetScore();
 }
 
 
@@ -113,7 +125,7 @@ function snakeMove(){
     if(direction === 'right') head.y += 1;
     if(direction === 'left') head.y -= 1;
 
-    // COLLISION WITH WALL
+    // WALL COLLISION
     if(head.x < 0 || head.x >= rows || head.y < 0 || head.y >= cols){
         alert("Game Over 💀");
         resetGame();
@@ -124,14 +136,16 @@ function snakeMove(){
 
     // FOOD EATEN
     if(head.x === foodPos.x && head.y === foodPos.y){
-        food(); // spawn new food
+        score += 1;   // ⭐ score increases by 1
+        updateScore();
+        food();
     }else{
         snake.shift();
     }
 }
 
 
-// KEYBOARD CONTROL
+// CONTROLS
 document.addEventListener('keydown',(e)=>{
 
     if(e.key === 'ArrowUp' && direction !== 'down') direction = 'up';
@@ -152,4 +166,5 @@ setInterval(()=>{
 // START GAME
 food();
 startTimer();
+updateScore();
 render();
