@@ -1,6 +1,7 @@
 const board = document.querySelector('.board');
 const timeDisplay = document.querySelector('.infos .info:nth-child(3) h3');
 const scoreDisplay = document.querySelector('.infos .info:nth-child(2) h3');
+const highScoreDisplay = document.querySelector('.infos .info:nth-child(1) h3');
 
 const blockheight = 40;
 const blockwidth = 40;
@@ -19,6 +20,10 @@ let seconds = 0;
 let timerInterval;
 
 let score = 0;
+
+// HIGH SCORE (from localStorage)
+let highScore = localStorage.getItem("highScore") || 0;
+highScoreDisplay.textContent = "High Score : " + highScore;
 
 
 // CREATE BOARD
@@ -61,6 +66,13 @@ function resetTimer(){
 // SCORE
 function updateScore(){
     scoreDisplay.textContent = "Score : " + score;
+
+    // UPDATE HIGH SCORE
+    if(score > highScore){
+        highScore = score;
+        localStorage.setItem("highScore", highScore);
+        highScoreDisplay.textContent = "High Score : " + highScore;
+    }
 }
 
 function resetScore(){
@@ -136,7 +148,7 @@ function snakeMove(){
 
     // FOOD EATEN
     if(head.x === foodPos.x && head.y === foodPos.y){
-        score += 1;   // ⭐ score increases by 1
+        score += 1;
         updateScore();
         food();
     }else{
